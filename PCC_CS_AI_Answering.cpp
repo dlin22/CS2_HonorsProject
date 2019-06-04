@@ -62,6 +62,10 @@ private:
 
 void Store_File_Sentences(ifstream & infile, string sentences[],
                           const int QUESTION_SIZE, string file);
+// Pre-condition : The function will receive a input file and
+//                 all the line sentences will be read.
+// Post-condition: The sentence on each line will be stored in 
+//                 the array based on the maxuimum string size.
 
 int main()
 {
