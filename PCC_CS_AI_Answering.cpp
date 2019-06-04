@@ -15,10 +15,23 @@ using namespace std;
 const int INPUT_SIZE = 100;
 const int QUESTION_SIZE = 100;
 const int ANSWER_SIZE = 100;
+const int COMMON_WORDS_SIZE = 56;
 const string QUESTION_FILE = "questions.txt";
 const string ANSWER_FILE = "answers.txt";
+const string COMMON_WORDS[COMMON_WORDS_SIZE] =
+                              {"is", "are", "it", "he","her", "they",
+                              "the", "that", "this", "these", "those",
+                              "his", "her", "its", "for", "of", "from",
+                              "do", "does", "did", "on", "if", "in", "at",
+                              "or", "to", "a", "beside", "an", "by", "have",
+                              "has", "i", "me", "will", "would", "while",
+                              "than","though", "through", "make", "made",
+                              "therefore", "however", "out", "again",
+                              "hence", "still", "thus", "so", "yet",
+                              "then", "before", "after", "however",
+                              "indeed"};
 
-// Defining the Class
+
 
 class Finding_Answers
 {
@@ -64,7 +77,7 @@ void Store_File_Sentences(ifstream & infile, string sentences[],
                           const int QUESTION_SIZE, string file);
 // Pre-condition : The function will receive a input file and
 //                 all the line sentences will be read.
-// Post-condition: The sentence on each line will be stored in 
+// Post-condition: The sentence on each line will be stored in
 //                 the array based on the maxuimum string size.
 
 int main()
@@ -89,6 +102,10 @@ int main()
 
         // Input Section
         user_questions.Question_section();
+
+        // Testing
+        for (string x: Questions)
+            cout << x << endl;
 
         // Processing
         user_questions.Matching_Questions(Questions);
@@ -163,27 +180,12 @@ void Finding_Answers::Question_section()
                 || Question[index] == '.')
             {
                 // Don't store the key words when it comes to these common words
-                if (Modified_Words == "is" || Modified_Words == "are"
-                 || Modified_Words == "it" || Modified_Words == "he"
-                 || Modified_Words == "he" || Modified_Words == "she"
-                 || Modified_Words == "they" || Modified_Words == "the"
-                 || Modified_Words == "that" || Modified_Words == "this"
-                 || Modified_Words == "these" || Modified_Words == "those"
-                 || Modified_Words == "his" || Modified_Words == "her"
-                 || Modified_Words == "its" || Modified_Words == "for"
-                 || Modified_Words == "of" || Modified_Words == "from"
-                 || Modified_Words == "do" || Modified_Words == "does"
-                 || Modified_Words == "did" || Modified_Words == "on"
-                 || Modified_Words == "if" || Modified_Words == "in"
-                 || Modified_Words == "at" || Modified_Words == "her"
-                 || Modified_Words == "or" || Modified_Words == "to"
-                 || Modified_Words == "a" || Modified_Words == "besides"
-                 || Modified_Words == "an" || Modified_Words == "by"
-                 || Modified_Words == "have" || Modified_Words == "has"
-                 || Modified_Words == "i" || Modified_Words == "me"
-                 || Modified_Words == "will" || Modified_Words == "would")
+                for (int index2 = 0; index2 < COMMON_WORDS_SIZE; index2 ++)
                 {
-                    Modified_Words = "";
+                    if (Modified_Words == COMMON_WORDS[index2])
+                    {
+                        Modified_Words = "";
+                    }
                 }
 
                 // Store the Key words into the array
@@ -214,8 +216,8 @@ void Finding_Answers::Question_section()
         }
 
         // Testing***********************************
-        //for (string X: Key_words)
-        //    cout << X << endl;
+        for (string X: Key_words)
+            cout << X << endl;
 
 }
 
@@ -236,7 +238,7 @@ void Finding_Answers::Matching_Questions(string File_Questions[])
         Key_Word_FOUND = false;
 
         // Testing (Details)******************************
-        // cout << file_question << endl;
+         cout << file_question << endl;
 
         for(unsigned int index = 0; index < index_question; index++)
         {
@@ -256,7 +258,7 @@ void Finding_Answers::Matching_Questions(string File_Questions[])
         }
 
         // Testing (Details)****************************************
-        // cout << Matching_value <<"  "<< index_file_question << endl;
+         cout << Matching_value <<"  "<< index_file_question << endl;
 
         // CASE 1: If previous Key words Matching value is bigger than the
         // current Matching value, store the previous question index
